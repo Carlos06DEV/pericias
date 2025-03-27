@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha Suas Perícias</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #f5f5dc;
+            font-family: 'Times New Roman', serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 3em;
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background-color: #333333;
+            border: 2px solid #654321;
+            border-radius: 10px;
+            width: 300px;
+            margin: 15px;
+            padding: 15px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ffcc00;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #ffcc00, #ff6f61, #6a0dad, #00bfff);
+            background-size: 300%;
+            z-index: -1;
+            animation: borderAnimation 6s infinite alternate;
+        }
+        @keyframes borderAnimation {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 300% 0;
+            }
+        }
+        .card.selected::before {
+            animation: none;
+            border: 4px solid #ffcc00;
+            background: none;
+        }
+        .card h2 {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .card p {
+            font-size: 1em;
+            line-height: 1.4;
+        }
+        .icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #ffcc00;
+        }
+        #escolha {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #ffcc00;
+        }
+        /* Estilo do botão Próxima Página */
+        .proxima-pagina {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #f5f5dc;
+            background-color: #654321;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .proxima-pagina:hover {
+            background-color: #8B4513;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Escolha Suas Perícias</h1>
+    <p>Você pode escolher até 4 perícias.</p>
+    <div class="container" id="pericias-container">
+        <!-- Card Acrobacia -->
+        <div class="card" data-pericia="Acrobacia">
+            <div class="icon">🤸‍♂️</div>
+            <h2>Acrobacia</h2>
+            <p>Habilidade em realizar manobras ágeis e evasivas.</p>
+        </div>
+        <!-- Card Atuação -->
+        <div class="card" data-pericia="Atuação">
+            <div class="icon">🎭</div>
+            <h2>Atuação</h2>
+            <p>Talento para representar papéis e enganar os outros.</p>
+        </div>
+        <!-- Card Domesticar Animais -->
+        <div class="card" data-pericia="Domesticar Animais">
+            <div class="icon">🐾</div>
+            <h2>Domesticar Animais</h2>
+            <p>Capacidade de treinar e controlar animais selvagens.</p>
+        </div>
+        <!-- Card Intuição -->
+        <div class="card" data-pericia="Intuição">
+            <div class="icon">🧠</div>
+            <h2>Intuição</h2>
+            <p>Sensibilidade para perceber intenções ocultas.</p>
+        </div>
+        <!-- Card Herbologia -->
+        <div class="card" data-pericia="Herbologia">
+            <div class="icon">🌱</div>
+            <h2>Herbologia</h2>
+            <p>Conhecimento sobre plantas medicinais e venenosas.</p>
+        </div>
+        <!-- Card Alquimia -->
+        <div class="card" data-pericia="Alquimia">
+            <div class="icon">🧪</div>
+            <h2>Alquimia</h2>
+            <p>Habilidade em criar poções e elixires mágicos.</p>
+        </div>
+        <!-- Card Encantar Objetos -->
+        <div class="card" data-pericia="Encantar Objetos">
+            <div class="icon">✨</div>
+            <h2>Encantar Objetos</h2>
+            <p>Capacidade de infundir objetos com magia.</p>
+        </div>
+        <!-- Card Runificação -->
+        <div class="card" data-pericia="Runificação">
+            <div class="icon">📜</div>
+            <h2>Runificação</h2>
+            <p>Conhecimento para inscrever runas mágicas.</p>
+        </div>
+        <!-- Card Familiar -->
+        <div class="card" data-pericia="Familiar">
+            <div class="icon">🦉</div>
+            <h2>Familiar</h2>
+            <p>Ligação mágica com um animal ou criatura.</p>
+        </div>
+        <!-- Card Forja -->
+        <div class="card" data-pericia="Forja">
+            <div class="icon">🔨</div>
+            <h2>Forja</h2>
+            <p>Habilidade em criar armas e armaduras poderosas.</p>
+        </div>
+        <!-- Card Musicista -->
+        <div class="card" data-pericia="Musicista">
+            <div class="icon">🎵</div>
+            <h2>Musicista</h2>
+            <p>Talento para tocar instrumentos e criar melodias encantadoras.</p>
+        </div>
+        <!-- Card Garra -->
+        <div class="card" data-pericia="Garra">
+            <div class="icon">💪</div>
+            <h2>Garra</h2>
+            <p>Força e resistência física excepcionais.</p>
+        </div>
+        <!-- Card Arquitetura -->
+        <div class="card" data-pericia="Arquitetura">
+            <div class="icon">🏛️</div>
+            <h2>Arquitetura</h2>
+            <p>Conhecimento sobre construção e design estrutural.</p>
+        </div>
+        <!-- Card Culinaria -->
+        <div class="card" data-pericia="Culinaria">
+            <div class="icon">🍳</div>
+            <h2>Culinária</h2>
+            <p>Habilidade em preparar pratos deliciosos e nutritivos.</p>
+        </div>
+        <!-- Card Engenharia -->
+        <div class="card" data-pericia="Engenharia">
+            <div class="icon">⚙️</div>
+            <h2>Engenharia</h2>
+            <p>Conhecimento sobre criação de mecanismos e dispositivos complexos.</p>
+        </div>
+        <!-- Card Visão -->
+        <div class="card" data-pericia="Visão">
+            <div class="icon">👁️</div>
+            <h2>Visão</h2>
+            <p>Habilidade em observar detalhes minuciosos e analisar cenários.</p>
+        </div>
+        <!-- Card Lockpick -->
+        <div class="card" data-pericia="Lockpick">
+            <div class="icon">🗝️</div>
+            <h2>Lockpick</h2>
+            <p>Destreza para abrir fechaduras e desarmar armadilhas.</p>
+        </div>
+        <!-- Card Montaria -->
+        <div class="card" data-pericia="Montaria">
+            <div class="icon">🐎</div>
+            <h2>Montaria</h2>
+            <p>Habilidade em cavalgar e controlar montarias.</p>
+        </div>
+        <!-- Card Cartografia -->
+        <div class="card" data-pericia="Cartografia">
+            <div class="icon">🗺️</div>
+            <h2>Cartografia</h2>
+            <p>Conhecimento para criar mapas precisos e detalhados.</p>
+        </div>
+        <!-- Card Negociação -->
+        <div class="card" data-pericia="Negociação">
+            <div class="icon">🤝</div>
+            <h2>Negociação</h2>
+            <p>Talento para persuadir e negociar acordos vantajosos.</p>
+        </div>
+    </div>
+    <div id="escolha">Você ainda não escolheu nenhuma perícia.</div>
+
+    <!-- Botão Próxima Página -->
+    <a href="https://carlos06dev.github.io/rpg/" class="proxima-pagina">Próxima Página</a>
+
+    <script>
+        // Variável para armazenar as escolhas do usuário (até 4 perícias)
+        let escolhas = [];
+
+        // Função para carregar escolhas do localStorage
+        function carregarEscolhas() {
+            const escolhasSalvas = localStorage.getItem('pericias');
+            if (escolhasSalvas) {
+                escolhas = JSON.parse(escolhasSalvas); // Converte de string para array
+                escolhas.forEach(pericia => {
+                    const card = document.querySelector(`[data-pericia="${pericia}"]`);
+                    if (card) {
+                        card.classList.add('selected'); // Marca o card como selecionado
+                    }
+                });
+                atualizarEscolhas(); // Atualiza a exibição das escolhas
+            }
+        }
+
+        // Função para salvar escolhas no localStorage
+        function salvarEscolhas() {
+            localStorage.setItem('pericias', JSON.stringify(escolhas)); // Converte array para string
+        }
+
+        // Função para lidar com o clique em um card
+        function selecionarPericia(event) {
+            const cardClicado = event.target.closest('.card'); // Encontra o card clicado
+            if (!cardClicado) return; // Sai se o clique não foi em um card
+
+            const pericia = cardClicado.getAttribute('data-pericia'); // Obtém o nome da perícia do atributo data-pericia
+
+            // Verifica se a perícia já foi selecionada
+            const index = escolhas.indexOf(pericia);
+
+            if (index === -1) {
+                // Se menos de 4 perícias foram escolhidas, adiciona a nova perícia
+                if (escolhas.length < 4) {
+                    escolhas.push(pericia);
+                    cardClicado.classList.add('selected');
+                } else {
+                    alert("Você só pode escolher até 4 perícias.");
+                    return;
+                }
+            } else {
+                // Remove a perícia se já estiver selecionada
+                escolhas.splice(index, 1);
+                cardClicado.classList.remove('selected');
+            }
+
+            // Salva as escolhas no localStorage
+            salvarEscolhas();
+
+            // Atualiza a exibição das escolhas
+            atualizarEscolhas();
+        }
+
+        // Função para atualizar a exibição das escolhas
+        function atualizarEscolhas() {
+            const escolhaElement = document.getElementById('escolha');
+            if (escolhas.length === 0) {
+                escolhaElement.textContent = "Você ainda não escolheu nenhuma perícia.";
+            } else {
+                escolhaElement.textContent = `Suas perícias escolhidas: ${escolhas.join(", ")}`;
+            }
+        }
+
+        // Adiciona o evento de clique ao container de perícias
+        document.getElementById('pericias-container').addEventListener('click', selecionarPericia);
+
+    </script>
+</body>
+</html>
